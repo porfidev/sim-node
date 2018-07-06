@@ -1,0 +1,30 @@
+{
+  "name": "sim-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log,.gitignore --copy-files",
+    "start": "npm run build && node dist/index.js",
+    "babel-node": "babel-node --presets=env",
+    "start:dev": "nodemon --exec npm run babel-node -- ./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "laravel-echo": "^1.4.0",
+    "rimraf": "^2.6.2",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "nodemon": "^1.17.5"
+  }
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+</head>
+<body>
+<h1>Hello Test</h1>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+
+  // TODO COnnect to Laravel var socket = io.connect('http://homestead.test:8070');
+
+  setInterval(function(){
+    socket.emit('sending message', { for: 'everyone', date: new Date().getTime() });
+  }, 5000);
+</script>
+</body>
+</html>
