@@ -9,13 +9,13 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io();
+  var socket = io('http://homestead.test:3000');
 
   // TODO COnnect to Laravel var socket = io.connect('http://homestead.test:8070');
 
   setInterval(function(){
     socket.emit('sending message', { for: 'everyone', date: new Date().getTime() });
-  }, 5000);
+  }, 15000);
 </script>
 </body>
 </html>

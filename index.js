@@ -2,10 +2,26 @@ import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
 import SocketIO from 'socket.io';
+import Redis from 'ioredis';
+
 
 const app = express();
 const server = http.createServer(app);
 let io = new SocketIO(server);
+const redis = new Redis(3002, 'homestead.test');
+
+redis.subscribe('test-channel', function(err, count) {
+  console.log('redis suscrito');
+});
+
+redis.on('message', function(channel, message) {
+  console.log('Message Recieved: ' + message);
+  message = JSON.parse(message);
+  io.sockets.emit(channel + ':' + message.event, message.data);
+  io.sockets.emit('sending message', { for: 'everyone', date: 'redis message' });
+});
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
