@@ -8,7 +8,7 @@ import Redis from 'ioredis';
 const app = express();
 const server = http.createServer(app);
 let io = new SocketIO(server);
-const redis = new Redis(3002, 'homestead.test');
+const redis = new Redis(6379, 'localhost');
 
 redis.subscribe('test-channel', function(err, count) {
   console.log('redis suscrito');
