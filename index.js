@@ -1,11 +1,32 @@
-import server from './src/server';
-import RedisController from './src/controller/redis';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import express from 'express';
+import morgan from 'morgan';
+import config from './src/config/config';
+import logger from './src/logger/app.logger';
 
-const redis = new RedisController('localhost', '6379');
+// Routes
+import redisRouter from './src/routes/redis.router';
 
-redis.subscribe('surtidos');
-redis.initializeEvents();
+const port = config.serverPort;
+logger.stream = {
+  write: (message, encoding) => {
+    logger.info(message);
+  }
+};
 
-server.listen(3000, function() {
-  console.log('Listening on port 3000...')
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(morgan('dev', {'stream': logger.stream}));
+
+app.use('/redis', redisRouter);
+
+app.get('/', (req, res) => {
+  res.send('server runing');
+});
+
+app.listen(port, () => {
+  logger.info('server started - '.port);
 });

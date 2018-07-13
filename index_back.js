@@ -11,14 +11,14 @@ let io = new SocketIO(server);
 const redis = new Redis(6379, 'localhost');
 
 redis.subscribe('test-channel', function(err, count) {
-  console.log('redis suscrito');
+  console.log('redisRouter suscrito');
 });
 
 redis.on('message', function(channel, message) {
   console.log('Message Recieved: ' + message);
   message = JSON.parse(message);
   io.sockets.emit(channel + ':' + message.event, message.data);
-  io.sockets.emit('sending message', { for: 'everyone', date: 'redis message' });
+  io.sockets.emit('sending message', { for: 'everyone', date: 'redisRouter message' });
 });
 
 
