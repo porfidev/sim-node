@@ -5,8 +5,12 @@
   <title>Test</title>
 </head>
 <body>
-<h1>Hello Test</h1>
+<ul id="messages"></ul>
 
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io('http://homestead.test:3000');
@@ -16,6 +20,10 @@
   setInterval(function(){
     socket.emit('sending message', { for: 'everyone', date: new Date().getTime() });
   }, 15000);
+
+  socket.on('new message', function(msg){
+    $('#messages').append($('<li>').text(msg));
+  });
 </script>
 </body>
 </html>

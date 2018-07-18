@@ -25,7 +25,7 @@ export default function routerM(io) {
 
     socket.on('sending message', (message) => {
       console.log('Message is received :', message);
-      io.sockets.emit('new message', {message: message});
+      io.emit('new message', {message: message});
     });
   });
 

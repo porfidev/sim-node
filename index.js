@@ -8,7 +8,7 @@ import logger from './src/logger/app.logger';
 import SocketIO from 'socket.io';
 
 // Routes
-import redisRouter from './src/routes/redis.router';
+// import redisRouter from './src/routes/redis.router';
 import ioRouter from './src/routes/io.router';
 
 
@@ -29,13 +29,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev', {'stream': logger.stream}));
 
-app.use('/redis', redisRouter);
+// app.use('/redis', redisRouter);
 app.use('/socket', ioInstance);
 
 app.get('/', (req, res) => {
-  res.send('server runing');
+  res.send('server running');
 });
 
-app.listen(port, () => {
+app.get('/echo', (req,res) => {
+  res.sendFile(__dirname + '/public/test.html');
+});
+
+server.listen(port, () => {
   logger.info('server started - '.port);
 });

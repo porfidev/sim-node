@@ -13,6 +13,7 @@ class IOController{
 
   static ping(io, req, res) {
     io.sockets.emit('sending message', { for: 'everyone', date: 'PONG' });
+
     logger.info('Doing PONG');
     res.send('PONG');
   }
