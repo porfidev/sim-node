@@ -8,8 +8,8 @@ export default function routerM(io) {
     IOController.ping(io, req, res);
   });
 
-  router.get('/hello', (req, res) => {
-    IOController.hello(io, req, res);
+  router.post('/emit-message', (req, res) => {
+    IOController.emitMessage(io, req, res);
   });
 
   const connections = [];
