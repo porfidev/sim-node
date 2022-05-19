@@ -5,7 +5,7 @@ Ambiente de socket para llamadas y actualización asincrona.
 
 ## Requerimientos
 
-* Node v8 o superior
+* Node v6 o superior
 
 
 ## Instalación

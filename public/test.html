@@ -11,18 +11,18 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
 <script>
   var socket = io('http://homestead.test:3000');
 
   // TODO COnnect to Laravel var socket = io.connect('http://homestead.test:8070');
 
-  setInterval(function(){
-    socket.emit('sending message', { for: 'everyone', date: new Date().getTime() });
-  }, 15000);
+  // setInterval(function(){
+  //   socket.emit('sending message', { for: 'everyone', date: new Date().getTime() });
+  // }, 15000);
 
-  socket.on('new message', function(msg){
-    $('#messages').append($('<li>').text(msg));
+  socket.on('some', function(msg){
+    console.info(msg);
   });
 </script>
 </body>
